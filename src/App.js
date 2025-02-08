@@ -1,4 +1,5 @@
 import "./App.css";
+import "./App.scss";
 import Header from "./components/Header/Header";
 import { Outlet, Link } from "react-router-dom";
 
@@ -10,7 +11,6 @@ const App = () => {
       </div>
       <div className="main-container">
         <div className="sidenav-container">
-          sidenav
         </div>
         <div className="app-content">
             <Outlet />

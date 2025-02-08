@@ -1,0 +1,23 @@
+.app-container {
+  .header-container {
+    .navbar {
+      z-index: 10;
+      background-color: white;
+      opacity: 0.9;
+      .navbar-nav {
+        .nav-link {
+            &.active {
+              color: red;
+            }
+        }
+    }
+    }
+      
+  }
+}
+
+video {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}
