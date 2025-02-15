@@ -6,22 +6,32 @@ import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary mb-4">
+    <Navbar expand="lg" className="bg-body-tertiary mb-5">
       <Container>
-        <NavLink className="navbar-brand" to="/">CyberSoft</NavLink>
+        <NavLink className="navbar-brand" to="/">
+          CyberSoft
+        </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink className="nav-link" to="/">Home</NavLink>
-            <NavLink className="nav-link" to="/users">Users</NavLink>
-            <NavLink className="nav-link" to="/admins">Admins</NavLink>
+            <NavLink className="nav-link" to="/">
+              Home
+            </NavLink>
+            <NavLink className="nav-link" to="/users">
+              Users
+            </NavLink>
+            <NavLink className="nav-link" to="/admins">
+              Admins
+            </NavLink>
           </Nav>
           <Nav>
-            <NavDropdown title="Settings" id="basic-nav-dropdown">
+            <button className="btn-login">Log in</button>
+            <button className="btn-dark mx-4">Sign up</button>
+            {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item>Log in</NavDropdown.Item>
               <NavDropdown.Item>Log out</NavDropdown.Item>
               <NavDropdown.Item>Profile</NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
