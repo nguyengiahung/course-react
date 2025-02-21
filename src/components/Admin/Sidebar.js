@@ -6,10 +6,19 @@ import {
   SidebarHeader,
   SidebarFooter,
   SidebarContent,
-} from 'react-pro-sidebar';
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
-import sidebarBg from '../../assets/background-sidebar.jpg';
+} from "react-pro-sidebar";
+import {
+  FaTachometerAlt,
+  FaGem,
+  FaList,
+  FaGithub,
+  FaRegLaughWink,
+  FaHeart,
+} from "react-icons/fa";
+import sidebarBg from "../../assets/background-sidebar.jpg";
+import logo from "../../assets/logo.png";
 import "react-pro-sidebar/dist/css/styles.css";
+import { Link } from "react-router-dom";
 
 const Sidebar = (props) => {
   const { image, collapsed, rtl, toggled, handleToggleSidebar } = props;
@@ -25,6 +34,10 @@ const Sidebar = (props) => {
         <div
           style={{
             padding: "24px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
             textTransform: "uppercase",
             fontWeight: "bold",
             fontSize: 14,
@@ -34,7 +47,8 @@ const Sidebar = (props) => {
             whiteSpace: "nowrap",
           }}
         >
-          CyberSoft
+          <img src={logo} className="logo-sidebar" />
+          <span>Cybersoft</span>
         </div>
       </SidebarHeader>
 
@@ -42,27 +56,22 @@ const Sidebar = (props) => {
         <Menu iconShape="circle">
           <MenuItem
             icon={<FaTachometerAlt />}
-            suffix={
-              <span className="badge red">
-                New
-              </span>
-            }
+            suffix={<span className="badge red">New</span>}
           >
-            dashboard
+            Dashboard
+            <Link to="/admins" />
           </MenuItem>
-          <MenuItem icon={<FaGem />}>
-          components
-          </MenuItem>
+          <MenuItem icon={<FaGem />}>Components</MenuItem>
         </Menu>
         <Menu iconShape="circle">
-          <SubMenu
-            suffix={<span className="badge yellow">3</span>}
-            icon={<FaRegLaughWink />}
-          >
-            <MenuItem>1</MenuItem>
-            <MenuItem>2</MenuItem>
-            <MenuItem>3</MenuItem>
-          </SubMenu>          
+          <SubMenu title={"Features"} icon={<FaRegLaughWink />}>
+            <MenuItem>
+              Quản lý Users
+              <Link to="/admins/manage-users" />
+            </MenuItem>
+            <MenuItem>Quản lý Bài Quiz</MenuItem>
+            <MenuItem>Quản lý Câu hỏi</MenuItem>
+          </SubMenu>
         </Menu>
       </SidebarContent>
 
@@ -73,23 +82,7 @@ const Sidebar = (props) => {
             padding: "20px 24px",
           }}
         >
-          <a
-            href="https://github.com/azouaoui-med/react-pro-sidebar"
-            target="_blank"
-            className="sidebar-btn"
-            rel="noopener noreferrer"
-          >
-            <FaGithub />
-            <span
-              style={{
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                overflow: "hidden",
-              }}
-            >
-              viewSource
-            </span>
-          </a>
+          CyberSoft
         </div>
       </SidebarFooter>
     </ProSidebar>

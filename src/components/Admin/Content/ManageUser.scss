@@ -1,0 +1,29 @@
+.modal-add-user {
+    .label-upload {
+        display: flex;
+        align-items: center;
+        gap: 0 6px;
+        width: fit-content;
+        background-color: #f4e4e4;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 4px 7px;
+        &:hover {
+            background-color: #ccc;
+        }
+    }
+    .img-preview {
+        border: 1px dashed #ccc;
+        height: 150px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ccc;
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+}
