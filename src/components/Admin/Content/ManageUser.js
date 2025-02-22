@@ -3,13 +3,13 @@ import './ManageUser.scss';
 
 const ManageUser = (props) => {
   return (
-    <div classNameName="manage-user-container">
-      <div classNameName="title">Manage User</div>
-      <div classNameName="users-content">
-        <div>
-          <button>Add new user</button>
-        </div>
-        <div>
+    <div className ="manage-user-container">
+      <div className ="title">Manage User</div>
+      <div className ="users-content">
+        {/* <div className="btn-add-new">
+          <button className="btn btn-primary d-flex align-items-center gap-1"> <FcPlus /> Add new users</button>
+        </div> */}
+        <div className="table-users">
           table users
         </div>
           <ModalCreateUser />
