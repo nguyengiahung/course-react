@@ -32,7 +32,6 @@ const ModalUpdateUser = (props) => {
   const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
-    console.log("run effect", dataUpdate);
     if (!_.isEmpty(dataUpdate)) {
       // update state
       setEmail(dataUpdate.email);
@@ -66,8 +65,6 @@ const ModalUpdateUser = (props) => {
       toast.error(data.EM);
     }
   };
-
-  console.log(dataUpdate);
 
   return (
     <>

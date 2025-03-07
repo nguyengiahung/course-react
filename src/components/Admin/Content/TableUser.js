@@ -2,7 +2,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 const TableUser = (props) => {
-  const { listUsers,handleClickBtnUpdate } = props;
+  const { listUsers,handleClickBtnUpdate, handleClickBtnDelete } = props;
 
   return (
     <div>
@@ -33,7 +33,7 @@ const TableUser = (props) => {
                     <button className="btn btn-primary mx-2" onClick={() => handleClickBtnUpdate(item)}>
                       <FaRegEdit />
                     </button>
-                    <button className="btn btn-danger">
+                    <button className="btn btn-danger" onClick={() => handleClickBtnDelete(item)}>
                       <MdDelete />
                     </button>
                   </td>
