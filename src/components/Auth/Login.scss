@@ -1,0 +1,31 @@
+.login-container {
+    .header {
+        height: 45px;
+        text-align: right;
+        border: 1px solid red;
+
+    }
+    .title {
+        font-size: 35px;
+        margin: 20px 0;
+    }
+    .welcome {
+        font-size: 25px;
+        margin: 20px 0;
+    }
+    .content-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+        label {
+            margin-bottom: 5px;
+        }
+    }
+    .forgot-password {
+        font-size: 14px;
+        color: #5b5858;
+    }
+    .btn-login {
+        height: 50px;
+    }
+}
