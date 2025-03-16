@@ -1,14 +1,16 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import "./Login.scss";
+import "./Register.scss";
 import { useState } from "react";
-import { postLogin } from "../../services/apiService";
+import { postLogin, postRegister } from "../../services/apiService";
 import { toast } from "react-toastify";
-
-const Login = (props) => {
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+const Register = (props) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const validateEmail = (email) => {
     return String(email)
@@ -18,7 +20,7 @@ const Login = (props) => {
       );
   };
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     //validate
     const isValidEmail = validateEmail(email);
     if (!isValidEmail) {
@@ -32,12 +34,12 @@ const Login = (props) => {
     }
 
     // submit api
-    let data = await postLogin(email, password);
+    let data = await postRegister(email, username, password);
     console.log(data);
 
     if (data && data.EC === 0) {
       toast.success(data.EM);
-      navigate("/");
+      navigate("/login");
     }
 
     if (data && data.EC !== 0) {
@@ -48,17 +50,18 @@ const Login = (props) => {
   return (
     <div className="login-container">
       <div className="header d-flex justify-content-end align-items-center  mt-2 gap-2">
-        <span>Dont' have an account yet?</span>
-        <button onClick={() => navigate("/register")}>Sign up</button>
-        <a href="">Need help?</a>
+        <span>Already have an account?</span>
+        <button onClick={() => navigate("/login")}>Log in</button>
       </div>
       <div className="title mx-auto col-3 text-center">CyberSoft</div>
       <div className="welcome mx-auto col-3 text-center">
-        Hello, who's this?
+        Start your journey?
       </div>
       <div className="content-form mx-auto col-3">
         <div className="form-group">
-          <label>Email</label>
+          <label>
+            Email <span className="text-danger">(*)</span>
+          </label>
           <input
             type="email"
             className="form-control"
@@ -67,21 +70,48 @@ const Login = (props) => {
           />
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label>
+            Password <span className="text-danger">(*)</span>
+          </label>
+          <div className="d-flex position-relative align-items-center">
+            <input
+              type={isShowPassword ? "text" : "password"}
+              className="form-control"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {isShowPassword ? (
+              <span
+                onClick={() => setIsShowPassword(false)}
+                className="position-absolute top-50 end-0 translate-middle-y me-3"
+              >
+                <IoEyeOutline />
+              </span>
+            ) : (
+              <span
+                onClick={() => setIsShowPassword(true)}
+                className="position-absolute top-50 end-0 translate-middle-y me-3"
+              >
+                <IoEyeOffOutline />
+              </span>
+            )}
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Username</label>
           <input
-            type="password"
+            type="text"
             className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <a className="forgot-password">Forgot password?</a>
         <div>
           <button
-            className="btn-login btn btn-primary bg-black border-0 w-100"
-            onClick={() => handleLogin()}
+            className="btn-login btn btn-primary bg-black border-0 w-100 mt-3"
+            onClick={() => handleRegister()}
           >
-            Login to CyberSoft
+            Create an account
           </button>
         </div>
         <div className="text-center">
@@ -100,4 +130,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Register;
