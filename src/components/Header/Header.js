@@ -9,7 +9,6 @@ const Header = () => {
   const navigate = useNavigate();
   const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  console.log(account, isAuthenticated);
   return (
     <Navbar expand="lg" className="bg-body-tertiary mb-5">
       <Container>
