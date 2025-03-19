@@ -36,6 +36,7 @@ const postLogin = (email, password) => {
   return axios.post("api/v1/login", {
     email: email,
     password: password,
+    delay: 3000,
   });
 };
 
