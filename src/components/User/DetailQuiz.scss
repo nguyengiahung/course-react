@@ -11,10 +11,22 @@
             margin: 20px 0;
         }
         .question-content {
+            .q-image {
+                img {
+                    width: fit-content;
+                    height: 300px;
+                }
+            }
             .question {
             font-weight: 600;
             font-size: 20px;
             }
+        }
+        .btn-read {
+            background-color: #d4cece;
+            border: none;
+            color: white;
+            cursor: no-drop;
         }
     }
     .right-content {
