@@ -30,9 +30,33 @@ const DetailQuiz = (props) => {
     }
   };
 
-  const handleFinish = () => {
-    
-  }
+  const handleCheckBox = (answerId, questionId) => {
+    let dataQuizClone = _.cloneDeep(dataQuiz);
+    let question = dataQuizClone.find(
+      (item) => +item.questionId === +questionId
+    );
+    if (question && question.answers && question.answers.length > 0) {
+      let b = question.answers.map(item => {
+        if (+item.id === +answerId) {
+          item.isSelected = !item.isSelected;
+        }
+        return item;
+      })
+      console.log(b);
+      question.answers = b;
+    }
+
+    let index = dataQuizClone.findIndex(item => +item.questionId === +questionId)
+    if (index > -1) {
+      dataQuizClone[index] = question;
+      setDataQuiz(dataQuizClone);
+    }
+
+  };
+
+
+
+  const handleFinish = () => {};
 
   const fetchQuestions = async () => {
     let res = await getQuizById(quizId);
@@ -51,6 +75,7 @@ const DetailQuiz = (props) => {
               questionDescription = item.description;
               image = item.image;
             }
+            item.answers.isSelected = false;
             answers.push(item.answers);
           });
           return { questionId: key, answers, questionDescription, image };
@@ -73,6 +98,7 @@ const DetailQuiz = (props) => {
         </div> */}
         <div className="question-content">
           <Question
+            handleCheckBox={handleCheckBox}
             index={index}
             data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
           />
@@ -84,14 +110,19 @@ const DetailQuiz = (props) => {
           >
             Prev
           </button>
-          <button onClick={() => handleNext()} className="btn btn-success">
+          <button
+            onClick={() => handleNext()}
+            className={
+              dataQuiz && dataQuiz.length < index + 1
+                ? "btn btn-none"
+                : "btn btn-success"
+            }
+          >
             Next
           </button>
-          {dataQuiz && dataQuiz.length === index + 1 && (
-            <button onClick={() => handleFinish()} className="btn btn-warning">
-              Finish
-            </button>
-          )}
+          <button onClick={() => handleFinish()} className="btn btn-warning">
+            Finish
+          </button>
         </div>
       </div>
       <div className="right-content">Countdown</div>

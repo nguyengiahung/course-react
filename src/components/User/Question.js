@@ -1,36 +1,50 @@
 import _ from "lodash";
 
 const Question = (props) => {
-  const { data, index } = props;
+  const { data, index, handleCheckBox } = props;
   if (_.isEmpty(data)) {
     return <></>;
   }
 
+  const handleCheckBox1 = (event, aId, qId) => {
+    // console.log('check' , event.target.checked);
+    console.log(aId, qId);
+    handleCheckBox(aId, qId);
+  };
+
   return (
     <>
-      {data.image && (
-        <div className="q-image">
+      {data.image ? (
+        <div className="q-image text-center">
           <img src={`data:image/jpeg;base64,${data.image}`} />
         </div>
+      ) : (
+        <div className="q-image"></div>
       )}
-      <div className="question my-2">
+      <div className="question my-2 text-center">
         Question {index + 1}: {data.questionDescription}?
       </div>
       <div className="answer">
         {data.answers &&
           data.answers.length > 0 &&
-          data.answers.map((item, index) => {
+          data.answers.map((a, index) => {
             return (
               <div key={`answer-${index}`}>
-                <div class="form-check">
+                <div className="form-check">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="checkbox"
-                    value=""
                     id="flexCheckDefault"
+                    checked={a.isSelected}
+                    onChange={(event) =>
+                      handleCheckBox1(event, a.id, +data.questionId)
+                    }
                   />
-                  <label class="form-check-label" for="flexCheckDefault">
-                    {item.description}
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefault"
+                  >
+                    {a.description}
                   </label>
                 </div>
               </div>
