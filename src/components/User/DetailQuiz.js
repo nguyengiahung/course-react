@@ -36,27 +36,66 @@ const DetailQuiz = (props) => {
       (item) => +item.questionId === +questionId
     );
     if (question && question.answers && question.answers.length > 0) {
-      let b = question.answers.map(item => {
+      let b = question.answers.map((item) => {
         if (+item.id === +answerId) {
           item.isSelected = !item.isSelected;
         }
         return item;
-      })
+      });
       console.log(b);
       question.answers = b;
     }
 
-    let index = dataQuizClone.findIndex(item => +item.questionId === +questionId)
+    let index = dataQuizClone.findIndex(
+      (item) => +item.questionId === +questionId
+    );
     if (index > -1) {
       dataQuizClone[index] = question;
       setDataQuiz(dataQuizClone);
     }
-
   };
 
+  const handleFinish = () => {
+    console.log("finish", dataQuiz);
+    //   {
+    //     "quizId": 1,
+    //     "answers": [
+    //         {
+    //             "questionId": 1,
+    //             "userAnswerId": [3]
+    //         },
+    //         {
+    //             "questionId": 2,
+    //             "userAnswerId": [6]
+    //         }
+    //     ]
+    // }
+    let payload = {
+      quizId: +quizId,
+      answers: [],
+    };
+    let answers = [];
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach((question) => {
+        let questionId = question.questionId;
+        let userAnswerId = [];
 
+        // to do userAnswerId
+        question.answers.forEach(a => {
+          if (a.isSelected === true) {
+             userAnswerId.push(a.id)
+          }
+        })
 
-  const handleFinish = () => {};
+        answers.push({
+          questionId: +questionId,
+          userAnswerId,
+        });
+      });
+      payload.answers = answers;
+      console.log(payload);
+    }
+  };
 
   const fetchQuestions = async () => {
     let res = await getQuizById(quizId);
@@ -81,7 +120,6 @@ const DetailQuiz = (props) => {
           return { questionId: key, answers, questionDescription, image };
         })
         .value();
-      console.log(data);
       setDataQuiz(data);
     }
   };
