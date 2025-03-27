@@ -4,7 +4,7 @@ import {store} from '../redux/store'
 
 NProgress.configure({
   showSpinner: false,
-  trickleSpeed: 100,
+  trickleSpeed: 200,
 });
 
 const instance = axios.create({

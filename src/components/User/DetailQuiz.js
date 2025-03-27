@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
-import { getQuizById } from "../../services/apiService";
+import { getQuizById, postSubmitQuiz } from "../../services/apiService";
 import _ from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
+import ModalResult from "./ModalResult";
 
 const DetailQuiz = (props) => {
   const params = useParams();
@@ -12,6 +13,8 @@ const DetailQuiz = (props) => {
 
   const [dataQuiz, setDataQuiz] = useState([]);
   const [index, setIndex] = useState(0);
+  const [isShowModalResult, setIsShowModalResult] = useState(false);
+  const [dataModalResult, setDataModalResult] = useState({});
 
   useEffect(() => {
     fetchQuestions();
@@ -55,7 +58,7 @@ const DetailQuiz = (props) => {
     }
   };
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     console.log("finish", dataQuiz);
     //   {
     //     "quizId": 1,
@@ -81,11 +84,11 @@ const DetailQuiz = (props) => {
         let userAnswerId = [];
 
         // to do userAnswerId
-        question.answers.forEach(a => {
+        question.answers.forEach((a) => {
           if (a.isSelected === true) {
-             userAnswerId.push(a.id)
+            userAnswerId.push(a.id);
           }
-        })
+        });
 
         answers.push({
           questionId: +questionId,
@@ -93,7 +96,21 @@ const DetailQuiz = (props) => {
         });
       });
       payload.answers = answers;
-      console.log(payload);
+
+      /// submit api
+      let res = await postSubmitQuiz(payload);
+      console.log(res);
+
+      if (res && res.EC === 0) {
+        setDataModalResult({
+          countCorrect: res.DT.countCorrect,
+          countTotal: res.DT.countTotal,
+          quizData: res.DT.quizData,
+        });
+        setIsShowModalResult(true);
+      } else {
+        alert("Something wrong!!!");
+      }
     }
   };
 
@@ -164,6 +181,11 @@ const DetailQuiz = (props) => {
         </div>
       </div>
       <div className="right-content">Countdown</div>
+      <ModalResult
+        show={isShowModalResult}
+        setShow={setIsShowModalResult}
+        dataModalResult={dataModalResult}
+      />
     </div>
   );
 };
