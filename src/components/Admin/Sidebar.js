@@ -18,10 +18,11 @@ import {
 import sidebarBg from "../../assets/background-sidebar.jpg";
 import logo from "../../assets/logo.png";
 import "react-pro-sidebar/dist/css/styles.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = (props) => {
   const { image, collapsed, rtl, toggled, handleToggleSidebar } = props;
+  const navigate = useNavigate();
   return (
     <ProSidebar
       image={sidebarBg}
@@ -48,7 +49,7 @@ const Sidebar = (props) => {
           }}
         >
           <img src={logo} className="logo-sidebar" />
-          <span>Cybersoft</span>
+          <span onClick={() => navigate('/')}>Cybersoft</span>
         </div>
       </SidebarHeader>
 
@@ -69,7 +70,10 @@ const Sidebar = (props) => {
               Quản lý Users
               <Link to="/admins/manage-users" />
             </MenuItem>
-            <MenuItem>Quản lý Bài Quiz</MenuItem>
+            <MenuItem>
+              Quản lý Bài Quiz
+              <Link to="/admins/manage-quizzes" />
+            </MenuItem>
             <MenuItem>Quản lý Câu hỏi</MenuItem>
           </SubMenu>
         </Menu>
