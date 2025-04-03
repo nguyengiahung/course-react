@@ -49,7 +49,7 @@ const Sidebar = (props) => {
           }}
         >
           <img src={logo} className="logo-sidebar" />
-          <span onClick={() => navigate('/')}>Cybersoft</span>
+          <span onClick={() => navigate("/")}>Cybersoft</span>
         </div>
       </SidebarHeader>
 
@@ -74,7 +74,10 @@ const Sidebar = (props) => {
               Quản lý Bài Quiz
               <Link to="/admins/manage-quizzes" />
             </MenuItem>
-            <MenuItem>Quản lý Câu hỏi</MenuItem>
+            <MenuItem>
+              Quản lý Câu hỏi
+              <Link to="/admins/manage-questions" />
+            </MenuItem>
           </SubMenu>
         </Menu>
       </SidebarContent>

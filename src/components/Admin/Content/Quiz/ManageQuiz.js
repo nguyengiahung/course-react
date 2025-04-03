@@ -1,10 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./ManageQuiz.scss";
 import Select from "react-select";
+import { getAllQuizForAdmin } from "../../../../services/apiService";
 import { postCreateNewQuiz } from "../../../../services/apiService";
 import { toast } from "react-toastify";
 import TableQuiz from "./TableQuiz";
 import Accordion from "react-bootstrap/Accordion";
+import ModalUpdateQuiz from "./ModalUpdateQuiz";
+import ModalDeleteQuiz from "./ModalDeleteQuiz";
 
 const options = [
   { value: "EASY", label: "EASY" },
@@ -13,12 +16,27 @@ const options = [
 ];
 
 const ManageQuiz = (props) => {
+  const [listQuiz, setListQuiz] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [image, setImage] = useState(null);
   const inputRef = useRef();
+  const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false);
+  const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
+  const [dataQuizUpdate, setDataQuizUpdate] = useState([]);
+  const [dataQuizDelete, setDataQuizDelete] = useState([]);
 
+  useEffect(() => {
+    fetchListQuiz();
+  }, []);
+
+  const fetchListQuiz = async () => {
+    let res = await getAllQuizForAdmin();
+    if (res && res.EC === 0) {
+      setListQuiz(res.DT);
+    }
+  };
   const handleChangeFile = (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
       setImage(event.target.files[0]);
@@ -42,6 +60,16 @@ const ManageQuiz = (props) => {
     } else {
       toast.error(res.EM);
     }
+  };
+
+  const handleClickBtnUpdate = (quiz) => {
+    setShowModalUpdateQuiz(true);
+    setDataQuizUpdate(quiz);
+  };
+
+  const handleClickBtnDelete = (quiz) => {
+    setShowModalDeleteQuiz(true);
+    setDataQuizDelete(quiz);
   };
 
   return (
@@ -104,7 +132,24 @@ const ManageQuiz = (props) => {
         </Accordion.Item>
       </Accordion>
       <div className="list-detail mt-4 mx-4">
-        <TableQuiz />
+        <TableQuiz
+          listQuiz={listQuiz}
+          handleClickBtnUpdate={handleClickBtnUpdate}
+          handleClickBtnDelete={handleClickBtnDelete}
+          fetchListQuiz={fetchListQuiz}
+        />
+        <ModalUpdateQuiz
+          show={showModalUpdateQuiz}
+          setShow={setShowModalUpdateQuiz}
+          dataQuizUpdate={dataQuizUpdate}
+          fetchListQuiz={fetchListQuiz}
+        />
+        <ModalDeleteQuiz
+          show={showModalDeleteQuiz}
+          setShow={setShowModalDeleteQuiz}
+          dataQuizDelete={dataQuizDelete}
+          fetchListQuiz={fetchListQuiz}
+        />
       </div>
     </div>
   );

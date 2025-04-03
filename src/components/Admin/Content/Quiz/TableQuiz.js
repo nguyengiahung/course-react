@@ -1,25 +1,11 @@
 import { useEffect, useState } from "react";
-import { getAllQuizForAdmin } from "../../../../services/apiService";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 const TableQuiz = (props) => {
-  const [listQuiz, setListQuiz] = useState([]);
-
-  useEffect(() => {
-    fetchListQuiz();
-  }, []);
-
-  const fetchListQuiz = async () => {
-    let res = await getAllQuizForAdmin();
-    if (res && res.EC === 0) {
-      setListQuiz(res.DT);
-    }
-  };
-
-  console.log(listQuiz);
-
+  const {listQuiz,fetchListQuiz, handleClickBtnUpdate, handleClickBtnDelete} = props;
+  
   return (
     <>
     <div className="">List Quizzes:</div>
@@ -47,10 +33,10 @@ const TableQuiz = (props) => {
                   <button className="btn btn-secondary">
                     <IoEyeSharp />
                   </button>
-                  <button className="btn btn-primary mx-2">
+                  <button className="btn btn-primary mx-2" onClick={() => handleClickBtnUpdate(quiz)}>
                     <FaRegEdit />
                   </button>
-                  <button className="btn btn-danger">
+                  <button className="btn btn-danger" onClick={() => handleClickBtnDelete(quiz)}>
                     <MdDelete />
                   </button>
                 </td>
