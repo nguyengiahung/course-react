@@ -45,20 +45,20 @@ const postRegister = (email, username, password) => {
     email: email,
     username: username,
     password: password,
-  })
-}
+  });
+};
 
 const getQuizByUser = () => {
-  return axios.get('api/v1/quiz-by-participant');
-}
+  return axios.get("api/v1/quiz-by-participant");
+};
 
 const getQuizById = (quizId) => {
-  return axios.get(`api/v1/questions-by-quiz?quizId=${quizId}`)
-}
+  return axios.get(`api/v1/questions-by-quiz?quizId=${quizId}`);
+};
 
 const postSubmitQuiz = (data) => {
-  return axios.post('api/v1/quiz-submit', {...data, delay: 1000})
-}
+  return axios.post("api/v1/quiz-submit", { ...data, delay: 1000 });
+};
 
 const postCreateNewQuiz = (description, name, difficulty, image) => {
   const data = new FormData();
@@ -67,11 +67,11 @@ const postCreateNewQuiz = (description, name, difficulty, image) => {
   data.append("difficulty", difficulty);
   data.append("quizImage", image);
   return axios.post("api/v1/quiz", data);
-}
+};
 
 const getAllQuizForAdmin = () => {
-  return axios.get('api/v1/quiz/all');
-}
+  return axios.get("api/v1/quiz/all");
+};
 
 const putUpdateQuiz = (id, description, name, difficulty, image) => {
   const data = new FormData();
@@ -85,7 +85,21 @@ const putUpdateQuiz = (id, description, name, difficulty, image) => {
 
 const deleteQuiz = (quizId) => {
   return axios.delete(`api/v1/quiz/${quizId}`);
-}
+};
+
+const postCreateNewQuestionForQuiz = (quiz_id, description, questionImage) => {
+  const data = new FormData();
+  data.append("quiz_id", quiz_id);
+  data.append("description", description);
+  data.append("questionImage", questionImage);
+  return axios.post("/api/v1/question", data);
+};
+
+const postCreateNewAnswerForQuestion = (description, correct_answer, question_id) => {
+  return axios.post("/api/v1/answer", {
+    description, correct_answer, question_id
+  });
+};
 
 export {
   postCreateUser,
@@ -93,6 +107,15 @@ export {
   putUpdateUser,
   deleteUser,
   getUserWithPaginate,
-  postLogin, postRegister,
-  getQuizByUser, getQuizById, postSubmitQuiz, postCreateNewQuiz, getAllQuizForAdmin, putUpdateQuiz, deleteQuiz
+  postLogin,
+  postRegister,
+  getQuizByUser,
+  getQuizById,
+  postSubmitQuiz,
+  postCreateNewQuiz,
+  getAllQuizForAdmin,
+  putUpdateQuiz,
+  deleteQuiz,
+  postCreateNewQuestionForQuiz,
+  postCreateNewAnswerForQuestion
 };

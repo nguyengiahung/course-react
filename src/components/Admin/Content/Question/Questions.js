@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import "./Questions.scss";
 import { FaMinusCircle } from "react-icons/fa";
@@ -11,13 +11,13 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
+import {
+  getAllQuizForAdmin,
+  postCreateNewAnswerForQuestion,
+  postCreateNewQuestionForQuiz,
+} from "../../../../services/apiService";
 
 const Questions = (props) => {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
   const [selectedQuiz, setSelectedQuiz] = useState({});
   const [questions, setQuestions] = useState([
     {
@@ -40,6 +40,26 @@ const Questions = (props) => {
     title: "",
     url: "",
   });
+
+  const [listQuiz, setListQuiz] = useState([]);
+
+  useEffect(() => {
+    fetchListQuiz();
+  }, []);
+
+  const fetchListQuiz = async () => {
+    let res = await getAllQuizForAdmin();
+    if (res && res.EC === 0) {
+      let newQuiz = res.DT.map((item) => {
+        return {
+          value: item.id,
+          label: `${item.id} - ${item.description}`,
+        };
+      });
+
+      setListQuiz(newQuiz);
+    }
+  };
 
   const handleAddRemoveQuestion = (type, id) => {
     if (type === "ADD") {
@@ -137,8 +157,31 @@ const Questions = (props) => {
     setQuestions(questionsClone);
   };
 
-  const handleSubmitQuestion = () => {
-    console.log(questions);
+  const handleSubmitQuestion = async () => {
+    console.log(questions, selectedQuiz);
+    //postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion
+    // submit questions
+
+    await Promise.all(
+      questions.map(async (question) => {
+        const q = await postCreateNewQuestionForQuiz(
+          +selectedQuiz.value,
+          question.description,
+          question.imageFile
+        );
+        await Promise.all(
+          question.answers.map(async (answer) => {
+            await postCreateNewAnswerForQuestion(
+              answer.description,
+              answer.isCorrect,
+              q.DT.id
+            );
+          })
+        );
+      })
+    );
+
+    // submit answers
   };
 
   const handlePreviewImage = (questionId) => {
@@ -162,7 +205,7 @@ const Questions = (props) => {
           <Select
             value={selectedQuiz}
             onChange={setSelectedQuiz}
-            options={options}
+            options={listQuiz}
           />
         </div>
         <div className="mt-4 mb-2">Add Questions:</div>
