@@ -10,7 +10,7 @@ const Header = () => {
   const account = useSelector((state) => state.user.account);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   return (
-    <Navbar expand="lg" className="bg-body-tertiary mb-5">
+    <Navbar expand="lg" className="bg-body-tertiary mb-2">
       <Container>
         <NavLink className="navbar-brand" to="/">
           CyberSoft
