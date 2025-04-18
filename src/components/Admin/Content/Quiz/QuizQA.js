@@ -16,6 +16,7 @@ import {
   getQuizWithQA,
   postCreateNewAnswerForQuestion,
   postCreateNewQuestionForQuiz,
+  postUpsertQA,
 } from "../../../../services/apiService";
 import { toast } from "react-toastify";
 
@@ -250,44 +251,32 @@ const QuizQA = (props) => {
     }
 
     // submit
-    for (const question of questions) {
-      const q = await postCreateNewQuestionForQuiz(
-        +selectedQuiz.value,
-        question.description,
-        question.imageFile
-      );
-      for (const answer of question.answers) {
-        await postCreateNewAnswerForQuestion(
-          answer.description,
-          answer.isCorrect,
-          q.DT.id
-        );
+    let questionsClone = _.cloneDeep(questions);
+    for (let i =0;i <questionsClone.length;i++ ) {
+      if (questionsClone[i].imageFile) {
+        questionsClone[i].imageFile = await toBase64(questionsClone[i].imageFile)
       }
     }
 
-    toast.success("Create question and answer succeed!");
-    setQuestions(initQuestions);
-    setSelectedQuiz({});
+    let res = await postUpsertQA({
+      quizId: selectedQuiz.value,
+      questions: questionsClone
+    })
 
-    // await Promise.all(
-    //   questions.map(async (question) => {
-    //     const q = await postCreateNewQuestionForQuiz(
-    //       +selectedQuiz.value,
-    //       question.description,
-    //       question.imageFile
-    //     );
-    //     await Promise.all(
-    //       question.answers.map(async (answer) => {
-    //         await postCreateNewAnswerForQuestion(
-    //           answer.description,
-    //           answer.isCorrect,
-    //           q.DT.id
-    //         );
-    //       })
-    //     );
-    //   })
-    // );
+
+    if (res && res.EC ===0) {
+      toast.success(res.EM);
+      fetchQuizWithQA();
+    }
+
   };
+
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+}); 
 
   const handlePreviewImage = (questionId) => {
     let questionsClone = _.cloneDeep(questions);
