@@ -6,7 +6,6 @@ const ModalResult = (props) => {
   const { show, setShow, dataModalResult } = props;
 
   const handleClose = () => setShow(false);
-  console.log('data', dataModalResult);
   return (
     <>
       {/* <Button variant="primary" onClick={handleShow}>

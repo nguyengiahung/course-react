@@ -21,7 +21,7 @@ const Question = (props) => {
       {data.image ? (
         <div className="q-image text-center">
           <img
-          style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             src={`data:image/jpeg;base64,${data.image}`}
             onClick={() => setIsPreviewImage(true)}
           />
