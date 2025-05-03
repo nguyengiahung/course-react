@@ -46,7 +46,6 @@ const DetailQuiz = (props) => {
         }
         return item;
       });
-      console.log(b);
       question.answers = b;
     }
 
@@ -183,7 +182,8 @@ const DetailQuiz = (props) => {
       </div>
       <div className="right-content">
         <RightContent dataQuiz={dataQuiz}
-        handleFinish={handleFinish}/>
+        handleFinish={handleFinish}
+        setIndex={setIndex}/>
       </div>
       <ModalResult
         show={isShowModalResult}

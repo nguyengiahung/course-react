@@ -12,7 +12,6 @@ const Question = (props) => {
 
   const handleCheckBox1 = (event, aId, qId) => {
     // console.log('check' , event.target.checked);
-    console.log(aId, qId);
     handleCheckBox(aId, qId);
   };
 
