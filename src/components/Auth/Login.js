@@ -53,6 +53,12 @@ const Login = (props) => {
     }
   };
 
+  const handleKeyDown = (event) => {
+    if (event && event.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="header d-flex justify-content-end align-items-center  mt-2 gap-2">
@@ -81,6 +87,7 @@ const Login = (props) => {
             className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(event) => handleKeyDown(event)}
           />
         </div>
         <a className="forgot-password">Forgot password?</a>
@@ -91,7 +98,7 @@ const Login = (props) => {
             disabled={isLoading}
           >
             <span>Login to CyberSoft</span>
-            {isLoading === true && <ImSpinner10 className="loader-icon" /> }
+            {isLoading === true && <ImSpinner10 className="loader-icon" />}
           </button>
         </div>
         <div className="text-center">

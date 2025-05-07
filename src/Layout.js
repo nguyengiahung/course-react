@@ -56,7 +56,6 @@ const Layout = (props) => {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/test" element={<PrivateRoute />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
