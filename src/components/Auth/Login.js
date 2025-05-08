@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner10 } from "react-icons/im";
+import Language from "../Header/Language";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -64,7 +66,7 @@ const Login = (props) => {
       <div className="header d-flex justify-content-end align-items-center  mt-2 gap-2">
         <span>Dont' have an account yet?</span>
         <button onClick={() => navigate("/register")}>Sign up</button>
-        <a href="">Need help?</a>
+        <Language />        
       </div>
       <div className="title mx-auto col-3 text-center">CyberSoft</div>
       <div className="welcome mx-auto col-3 text-center">

@@ -7,6 +7,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { doLogout } from "../../redux/action/userAction";
+import Language from "./Language";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -16,10 +17,9 @@ const Header = () => {
 
   const handleLogout = async () => {
     let res = await logout("account.email", account.refresh_token);
-    console.log(res);
     if (res && res.EC === 0) {
       //clear data redux
-      dispatch(doLogout())
+      dispatch(doLogout());
 
       navigate("/login");
     } else {
@@ -69,6 +69,7 @@ const Header = () => {
                 </button>
               </>
             )}
+            <Language />
           </Nav>
         </Navbar.Collapse>
       </Container>
