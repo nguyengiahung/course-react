@@ -12,6 +12,12 @@
     width: 100%;
     .admin-header {
       height: 40px;
+      border: 1px solid #ccc;
+      .btn-dropdown {
+        color: #666666;
+        cursor: pointer;
+        font-size: 22px;
+      }
     }
     .admin-main {
       height: calc(100vh - 40px);

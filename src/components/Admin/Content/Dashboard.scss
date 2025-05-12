@@ -1,0 +1,40 @@
+.dashboard-container {
+  padding: 35px;
+  .title {
+    font-size: 25px;
+    font-weight: 600;
+    margin: 25px 0;
+  }
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .c-left {
+      width: 50%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      .child {
+        width: calc(50% - 10px);
+        height: 150px;
+        flex-direction: column;
+        border: 1px solid gray;
+        border-radius: 15px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .text-1 {
+          font-size: 20px;
+        }
+        .text-2 {
+          font-size: 25px;
+        }
+      }
+    }
+    .c-right {
+      width: 50%;
+      height: 350px;
+    }
+  }
+}
