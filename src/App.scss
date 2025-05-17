@@ -70,6 +70,20 @@ body {
       z-index: 10;
       padding-top: 20px;
       background-color: rgba($color: #000000, $alpha: 0) !important;
+      .brand-icon {
+        color: blue;
+        font-size: 24px;
+        height: 40px;
+        animation: spin 5s infinite linear;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
       .navbar-nav {
         .nav-link {
           color: #000000;

@@ -1,9 +1,10 @@
 import _ from "lodash";
 import { useState } from "react";
 import Lightbox from "react-awesome-lightbox";
-
+import { IoSadOutline } from "react-icons/io5";
+import { IoIosCheckmark, IoMdClose } from "react-icons/io";
 const Question = (props) => {
-  const { data, index, handleCheckBox } = props;
+  const { data, index, handleCheckBox, isShowAnswer, isSubmitQuiz } = props;
   const [isPreviewImage, setIsPreviewImage] = useState(false);
 
   if (_.isEmpty(data)) {
@@ -50,6 +51,7 @@ const Question = (props) => {
                     type="checkbox"
                     id="flexCheckDefault"
                     checked={a.isSelected}
+                    disabled={isSubmitQuiz}
                     onChange={(event) =>
                       handleCheckBox1(event, a.id, +data.questionId)
                     }
@@ -60,6 +62,16 @@ const Question = (props) => {
                   >
                     {a.description}
                   </label>
+                  {isShowAnswer === true && (
+                    <>
+                      {a.isCorrect === true && (
+                        <IoIosCheckmark className="correct" />
+                      )}
+                      {a.isSelected === true && a.isCorrect === false && (
+                        <IoMdClose className="incorrect" />
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             );

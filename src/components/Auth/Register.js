@@ -4,6 +4,8 @@ import { useState } from "react";
 import { postLogin, postRegister } from "../../services/apiService";
 import { toast } from "react-toastify";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { useTranslation, Trans } from 'react-i18next';
+
 const Register = (props) => {
   const navigate = useNavigate();
 
@@ -11,6 +13,7 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const { t } = useTranslation();
 
   const validateEmail = (email) => {
     return String(email)
@@ -50,12 +53,12 @@ const Register = (props) => {
   return (
     <div className="login-container">
       <div className="header d-flex justify-content-end align-items-center  mt-2 gap-2">
-        <span>Already have an account?</span>
-        <button onClick={() => navigate("/login")}>Log in</button>
+        <span>{t('register.title')}</span>
+        <button onClick={() => navigate("/login")}>{t('register.login')}</button>
       </div>
       <div className="title mx-auto col-3 text-center">CyberSoft</div>
       <div className="welcome mx-auto col-3 text-center">
-        Start your journey?
+        {t('register.subtitle')}
       </div>
       <div className="content-form mx-auto col-3">
         <div className="form-group">
@@ -71,7 +74,7 @@ const Register = (props) => {
         </div>
         <div className="form-group">
           <label>
-            Password <span className="text-danger">(*)</span>
+            {t('register.password')} <span className="text-danger">(*)</span>
           </label>
           <div className="d-flex position-relative align-items-center">
             <input
@@ -98,7 +101,7 @@ const Register = (props) => {
           </div>
         </div>
         <div className="form-group">
-          <label>Username</label>
+          <label>{t('register.username')}</label>
           <input
             type="text"
             className="form-control"
@@ -111,7 +114,7 @@ const Register = (props) => {
             className="btn-login btn btn-primary bg-black border-0 w-100 mt-3"
             onClick={() => handleRegister()}
           >
-            Create an account
+            {t('register.create')}
           </button>
         </div>
         <div className="text-center">
@@ -122,7 +125,7 @@ const Register = (props) => {
             }}
           >
             {" "}
-            &#60; &#60; Go to Homepage
+            &#60; &#60; {t('register.homepage')}
           </span>
         </div>
       </div>

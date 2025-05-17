@@ -8,6 +8,7 @@ import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner10 } from "react-icons/im";
 import Language from "../Header/Language";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { useTranslation, Trans } from 'react-i18next';
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
 
   const validateEmail = (email) => {
     return String(email)
@@ -64,13 +66,15 @@ const Login = (props) => {
   return (
     <div className="login-container">
       <div className="header d-flex justify-content-end align-items-center  mt-2 gap-2">
-        <span>Dont' have an account yet?</span>
-        <button onClick={() => navigate("/register")}>Sign up</button>
-        <Language />        
+        <span>{t("login.title")}</span>
+        <button onClick={() => navigate("/register")}>
+          {t("login.signup")}
+        </button>
+        <Language />
       </div>
       <div className="title mx-auto col-3 text-center">CyberSoft</div>
       <div className="welcome mx-auto col-3 text-center">
-        Hello, who's this?
+        {t("login.hello")}
       </div>
       <div className="content-form mx-auto col-3">
         <div className="form-group">
@@ -83,7 +87,7 @@ const Login = (props) => {
           />
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label>{t("login.password")}</label>
           <input
             type="password"
             className="form-control"
@@ -92,14 +96,14 @@ const Login = (props) => {
             onKeyDown={(event) => handleKeyDown(event)}
           />
         </div>
-        <a className="forgot-password">Forgot password?</a>
+        <a className="forgot-password">{t("login.forgot_password")}</a>
         <div>
           <button
             className="btn-login btn btn-primary border-0 w-100 d-flex align-items-center justify-content-center"
             onClick={() => handleLogin()}
             disabled={isLoading}
           >
-            <span>Login to CyberSoft</span>
+            <span>{t("login.login_text")}</span>
             {isLoading === true && <ImSpinner10 className="loader-icon" />}
           </button>
         </div>
@@ -111,7 +115,7 @@ const Login = (props) => {
             }}
           >
             {" "}
-            &#60; &#60; Go to Homepage
+            &#60; &#60; {t("login.homepage")}
           </span>
         </div>
       </div>

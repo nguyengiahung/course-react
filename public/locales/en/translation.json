@@ -3,7 +3,43 @@
     "title1": "Get to know your customers with forms",
     "title2": "Collect all the data you need to understand customers with forms designed to be refreshingly different",
     "title3": {
-      "login": "Get's started—it's free"
+      "login": "Get's started—it's free",
+      "doing": "Doing Quiz Now"
     }
+  },
+  "header": {
+    "home": "Home",
+    "users": "Users",
+    "admins": "Admins",
+    "login": "Log In",
+    "logout": "Log out",
+    "signup": "Sign Up",
+    "quiz": "Quiz"
+  },
+  "quiz": {
+    "detail": {
+      "prev": "Prev",
+      "next": "Next",
+      "finish": "Finish",
+      "show_answers": "Show Answers"
+    }
+  },
+  "login": {
+    "title": "Dont' have an account yet?",
+    "hello": "Hello, who's this?",
+    "signup": "Sign up",
+    "password": "Password",
+    "forgot_password": "Forgot password?",
+    "login_text": "Login to CyberSoft",
+    "homepage": "Go to Homepage"
+  },
+  "register": {
+    "title": "Already have an account?",
+    "subtitle": "Start your journey?",
+    "login": "Log in",
+    "password": "Password",
+    "username": "Username",
+    "create": "Create an account",
+    "homepage": "Go to Homepage"
   }
 }

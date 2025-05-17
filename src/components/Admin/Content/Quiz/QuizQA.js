@@ -291,7 +291,7 @@ const QuizQA = (props) => {
   };
 
   return (
-    <div className="question-container">
+    <div className="question-container p-4">
       <div className="add-new-question">
         <div className="col-6 form-group">
           <label className="mb-2">Select Quiz:</label>

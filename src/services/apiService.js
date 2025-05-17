@@ -130,7 +130,22 @@ const logout = (email, refresh_token) => {
 
 const getOverview = () => {
   return axios.get('/api/v1/overview');
+}
 
+const updateProfile = (username, userImage) => {
+  return axios.post('/api/v1/profile', {
+    username, userImage
+  });
+}
+
+const changePassword = (current_password, new_password) => {
+  return axios.post('/api/v1/change-password', {
+    current_password, new_password
+  });
+}
+
+const getHistory = () => {
+  return axios.get('/api/v1/history');
 }
 
 export {
@@ -154,5 +169,8 @@ export {
   getQuizWithQA,
   postUpsertQA,
   logout,
-  getOverview
+  getOverview,
+  updateProfile,
+  changePassword,
+  getHistory
 };

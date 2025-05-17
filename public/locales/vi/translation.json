@@ -3,7 +3,42 @@
     "title1": "Tìm hiểu khách hàng của bạn bằng các biểu mẫu...",
     "title2": "Thu thập tất cả dữ liệu bạn cần để hiểu khách hàng bằng các biểu mẫu được thiết kế để tạo sự khác biệt mới mẻ",
     "title3": {
-      "login": "Bắt đầu—miễn phí"
+      "login": "Bắt đầu—miễn phí",
+      "doing": "Bắt đầu ngay"
     }
+  },
+  "header": {
+    "home": "Trang Chủ",
+    "users": "Người Dùng",
+    "admins": "Quản Trị Viên",
+    "login": "Đăng Nhập",
+    "logout": "Đăng Xuất",
+    "signup": "Đăng Ký"
+  },
+  "quiz": {
+    "detail": {
+      "prev": "Trước",
+      "next": "Sau",
+      "finish": "Hoàn Thành",
+      "show_answers": "Hiện Đáp Án"
+    }
+  },
+  "login": {
+    "title": "Chưa có tài khoản?",
+    "hello": "Xin chào, ai đó?",
+    "signup": "Đăng Nhập",
+    "password": "Mật Khẩu",
+    "forgot_password": "Quên Mật Khẩu?",
+    "login_text": "Đăng Nhập tới CyberSoft",
+    "homepage": "Về Trang Chủ"
+  },
+  "register": {
+    "title": "Đã có tài khoản?",
+    "subtitle": "Bắt đầu cuộc hành trình?",
+    "login": "Đăng Nhập",
+    "password": "Mật Khẩu",
+    "username": "Họ và Tên",
+    "create": "Tạo tài khoản",
+    "homepage": "Về Trang Chủ"
   }
 }

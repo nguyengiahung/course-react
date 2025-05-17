@@ -48,8 +48,11 @@ const Sidebar = (props) => {
             whiteSpace: "nowrap",
           }}
         >
-          <img src={logo} className="logo-sidebar" />
-          <span onClick={() => navigate("/")}>Cybersoft</span>
+          <img
+            onClick={() => navigate("/")}
+            src={logo}
+            className="logo-sidebar"
+          />
         </div>
       </SidebarHeader>
 
@@ -62,7 +65,6 @@ const Sidebar = (props) => {
             Dashboard
             <Link to="/admins" />
           </MenuItem>
-          <MenuItem icon={<FaGem />}>Components</MenuItem>
         </Menu>
         <Menu iconShape="circle">
           <SubMenu title={"Features"} icon={<FaRegLaughWink />}>

@@ -1,0 +1,15 @@
+.modal-content {
+  .modal-body {
+    .navbar-nav {
+      flex-direction: row;
+      .nav-item {
+        .nav-link {
+          padding: 10px 25px;
+          &.active {
+            color: blue;
+          }
+        }
+      }
+    }
+  }
+}

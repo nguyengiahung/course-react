@@ -22,7 +22,7 @@ const HomePage = (props) => {
         </div>
         <div className="homepage-start">
           {isAuthenticated ? (
-            <button onClick={() => navigate('/users')} className="homepage-btn btn-dark">Doing Quiz Now</button>
+            <button onClick={() => navigate('/users')} className="homepage-btn btn-dark">{t('homepage.title3.doing')}</button>
           ) : (
             <button onClick={() => navigate('/login')} className="homepage-btn btn-dark">
               {t('homepage.title3.login')}

@@ -3,7 +3,12 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const ModalResult = (props) => {
-  const { show, setShow, dataModalResult } = props;
+  const { show, setShow, dataModalResult, setIsShowAnswer } = props;
+
+  const handleShow = () => {
+    handleClose()
+    setIsShowAnswer(true);
+  }
 
   const handleClose = () => setShow(false);
   return (
@@ -21,7 +26,7 @@ const ModalResult = (props) => {
           <div>Total Correct Answers: <b>{dataModalResult.countCorrect}</b></div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={() => handleShow()}>
             Show Answers
           </Button>
           <Button variant="primary" onClick={() => handleClose()}>
